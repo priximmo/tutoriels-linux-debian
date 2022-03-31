@@ -2,14 +2,14 @@
 %author: xavki
 
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 
 <br>
 
 Un standard
 
-* Système de Fichiers = Filesystem
+* Système de Fichierss = Filesystem
 
 * Filesystem Hierarchy Standard (FHS) : standard Linux (version 3 datant 2015)
 
@@ -21,7 +21,7 @@ Un standard
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -48,7 +48,7 @@ Note : et bien d'autres encore plus importantes (mais moins utilisées)
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -82,7 +82,7 @@ sudo apt install tree
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -98,7 +98,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -110,7 +110,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -123,7 +123,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -139,7 +139,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -151,7 +151,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -163,7 +163,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -175,7 +175,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -187,7 +187,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -199,7 +199,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -216,7 +216,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -233,7 +233,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -245,7 +245,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -258,7 +258,7 @@ LES REPERTOIRES
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
@@ -270,7 +270,7 @@ lost+found
 
 ---------------------------------------------------------------------
 
-# LINUX : Commandes & Hiérarchie du Système de Fichier
+# LINUX : Commandes & Hiérarchie du Système de Fichiers
 
 <br>
 
