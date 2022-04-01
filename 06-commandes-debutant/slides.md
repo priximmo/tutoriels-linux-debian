@@ -15,6 +15,12 @@
 		* -larth
 		* -R
 
+<br>
+
+* tabulation ;)
+
+* ctrl + r : recherche
+
 -------------------------------------------------------------------------------
 
 # LINUX : Les commandes du débutant
