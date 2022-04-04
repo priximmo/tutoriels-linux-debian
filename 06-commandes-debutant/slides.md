@@ -45,7 +45,7 @@
 
 <br>
 
-* man : la documantation
+* man : la documentation
 		* -k
 		* -L fr
 
