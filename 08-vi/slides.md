@@ -4,6 +4,7 @@
 
 # LINUX : L'édition avec Vi/Vim
 
+
 <br>
 
 
@@ -24,6 +25,12 @@ a
 ```
 i
 ```
+
+----------------------------------------------------------------
+
+# LINUX : L'édition avec Vi/Vim
+
+<br>
 
 * mode visuel
 
@@ -50,6 +57,12 @@ Esc
 :wq!
 ```
 
+----------------------------------------------------------------
+
+# LINUX : L'édition avec Vi/Vim
+
+<br>
+
 * première et dernière ligne (en mode normal)
 
 ```
@@ -68,6 +81,12 @@ G
 ```
 :<num_ligne>
 ```
+
+----------------------------------------------------------------
+
+# LINUX : L'édition avec Vi/Vim
+
+<br>
 
 * undo/redo
 
@@ -90,6 +109,12 @@ p
 3yy
 p
 ```
+
+----------------------------------------------------------------
+
+# LINUX : L'édition avec Vi/Vim
+
+<br>
 
 * copier/coller d'un numéro de ligne à un autre
 
