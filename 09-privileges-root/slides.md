@@ -34,6 +34,8 @@ su
 
 		* -s : spécification d'un shell
 
+<br>
+
 ```
 su -c "whoami" root
 su -c "ls /root/" - root
@@ -107,11 +109,12 @@ sudo -i
 Defaults editor=/usr/bin/vim
 ```
 
-<qui> <sys_source> = (<où> <qui_cible>) <quoi> 
-<qui> <sys_source> = (<où> <qui_cible>) <quoi>, <quoi>, <quoi>
+<qui> <sys_source> = (<qui_cible>) <quoi> 
+<qui> <sys_source> = (<qui_cible>) <quoi>, <quoi>, <quoi>
 
+```
 xavki ALL = (ALL) ALL
-xavki ALL = (ALL) ALL
-
+xavki ALL = (ALL) NOPASSWD: /sbin/shutdown
+```
 
 Note : toujours garder une session de root ouverte à coté
