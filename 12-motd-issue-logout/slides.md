@@ -2,7 +2,7 @@
 %author: xavki
 
 
-# LINUX : MOTD & ISSUE
+# LINUX : MOTD & ISSUE & LOGOUT
 
 <br>
 
@@ -15,11 +15,11 @@
 
 		* à la sortie : .bash_logout
 
-	=> Man !!!
+	=> "Man !!!"
 
 
 ---------------------------------------------------------------
-	
+
 # LINUX : MOTD & ISSUE
 
 
@@ -42,7 +42,7 @@ ISSUE
 ```
 
 ---------------------------------------------------------------
-	
+
 # LINUX : MOTD & ISSUE
 
 
@@ -65,7 +65,7 @@ MOTD
 ```
 
 ---------------------------------------------------------------
-	
+
 # LINUX : MOTD & ISSUE
 
 <br>
@@ -73,7 +73,8 @@ MOTD
 * script custom
 
 ```
-/etc/profile.d/motd.sh
+/etc/profile.d/01-motd.sh
+chmod +x /etc/profile.d/01-motd.sh
 ```
 
 ```
@@ -90,8 +91,12 @@ echo "IP : "$(hostname -I)
 touch ~/.hushlogin
 ```
  
+<br>
+
+https://github.com/dylanaraps/neofetch
+
 ---------------------------------------------------------------
-	
+
 # LINUX : MOTD & ISSUE
 
 
