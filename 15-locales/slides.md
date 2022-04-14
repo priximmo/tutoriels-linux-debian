@@ -71,9 +71,7 @@ Liste des principales locales :
 
 		* LC_MONETARY : format monétaire
 
-		* LC_TELEPHONE / LC_ADDRESS
-
-		* LC_MEASUREMENT / LC_NAME
+		* LC_TELEPHONE / LC_ADDRESS / LC_MEASUREMENT / LC_NAME
 
 ---------------------------------------------------------------------------------
 
