@@ -66,6 +66,12 @@ sudo lsblk -fe7
 
 		* pass : 0 (rien) / 1 (avant 2) / 2 (ordre de priorité) par fsck
 	
+------------------------------------------------------------------------------------------
+
+# LINUX : Mount & Le fichier FSTAB
+
+<br>
+
 		* options : du montage 
 
 				* defaults : rw,exec,auto,suid,dev,nouser,async
@@ -91,7 +97,7 @@ sudo lsblk -fe7
 
 ```
 init=/bin/bash
-mount -no remout,rw /
+mount -no remount,rw /
 #nano ... ajout nofail
 #passwd root
 exec /sbin/init
