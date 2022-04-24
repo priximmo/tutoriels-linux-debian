@@ -8,11 +8,15 @@
 
 	Disque > block> système d'exploitation > filesystème
 
+<br>
+
 	Journalisation : enregistrement des modifications (datas/metadatas)
 					* utile en cas de crash	
 
+<br>
+
 	Delayed allocation : les données sont stockées dans un buffer/tampon
-					* avant d'être écites sur les data blocks
+					* avant d'être écrites sur les data blocks
 					* permet de temporiser pour réduire la fragmentation...
 
 --------------------------------------------------------------
@@ -29,7 +33,11 @@ EXT4
 
 		Disque = Boot Block + Block Group + .... + Block Group
 
+<br>
+
 		Block Group = x blocks
+
+<br>
 
 		Block Group = 
 				* Super Block (1) : infos du filesystème (nb blocks...)
@@ -38,6 +46,8 @@ EXT4
 				* Inode Bitmap (1) : carte des blocks dédiés aux inodes
 				* Inode Table (n) : metadatas et données des fichiers
 				* Data Block (n) : données
+
+<br>
 
 		Ex : Directory > Inode > X data blocks
 
