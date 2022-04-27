@@ -6,7 +6,7 @@
 
 <br>
 
-	Disks/Paritions > PV > VG LV > Volumes FS
+	Disks/Partitions > PV > VG > LV > Volumes FS
 
 <br>
 
