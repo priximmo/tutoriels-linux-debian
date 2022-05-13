@@ -6,13 +6,6 @@
 
 <br>
 
-
-2 partitions
-
-pvcreate /dev/sdb1 /dev/sdc1
-
-vg vg_data /dev/sdb1 /dev/sdc1
-
 Physical Extents = blocks LVM (taille > nombre)
 
 	* petits LV = petits extents
@@ -23,52 +16,111 @@ Physical Extents = blocks LVM (taille > nombre)
 
 	* vgcreate -s (spécifier la taille des extents)
 
+----------------------------------------------------------------------------------------------------
+
+# LINUX : LVM - Comment mirrorer/copier un volume ?
+
+<br>
+
+* commençons à partir de 2 partitions
+
+```
+pvcreate /dev/sdb1 /dev/sdc1
+vgcreate vg_data /dev/sdb1 /dev/sdc1
+```
+
+----------------------------------------------------------------------------------------------------
+
+# LINUX : LVM - Comment mirrorer/copier un volume ?
+
+<br>
+
+* puis créons un LV mirroré
+
+```
 lvcreate -L 200M -n lv_xavki -m1 /dev/vg_data
+lvs -o +devices -a
+```
 
-(-m : nombre de copie)
+Rq : -m nombre de copie
 
-lvs : indique l'état de la synchronisation
-	(-o +devices -a)
+----------------------------------------------------------------------------------------------------
 
+# LINUX : LVM - Comment mirrorer/copier un volume ?
+
+<br>
+
+* n'oublions pas le formatage de notre FS
+
+```
 mkfs.ext4 /dev/vg_data/lv_xavki
-
 mount -t ext4 /dev/vg_data/lv_xavki /srv/xavki
-
 touch /srv/xavki/demo1.txt
+```
 
-* test : suppression d'un PV
+----------------------------------------------------------------------------------------------------
+
+# LINUX : LVM - Comment mirrorer/copier un volume ?
+
+<br>
+
+* test : remplacement d'un PV
 
 attention : si uniquement des LV mirrorés
 
-pvremove /dev/sdb1
+```
+lvconvert --replace /dev/sdb1 /dev/vg_data/lv_xavki /dev/sdd1
 lvdisplay
 lvs
+```
 
-vgreduce --removemissing vg_data --force
+----------------------------------------------------------------------------------------------------
 
-* remettre la partition manquante
+# LINUX : LVM - Comment mirrorer/copier un volume ?
 
-pvcreate /dev/sdb1
-
-vgextend vg_data /dev/sdb1
+<br>
 
 * réparation du LV mirroré (sync extents)
 
+```
 lvconvert --repair /dev/vg_data/lv_xavki
 lvs -a -o +devices
+```
 
-* comment passer d'un LV mirroré à un LV simple
+----------------------------------------------------------------------------------------------------
 
-lvconvert -m 0 /dev/vg_data/lv_xavki /dev/sdb1
+# LINUX : LVM - Comment mirrorer/copier un volume ?
+
+<br>
+
+* comment passer d'un LV mirroré à un LV simple ?
+
+```
+lvconvert -m 0 /dev/vg_data/lv_xavki /dev/sdd1
 lvs -a -o +devices
+```
 
-* comment mirroré un LV simple ?
+----------------------------------------------------------------------------------------------------
 
-lvconvert -m 1 /dev/vg_data/lv_xavki /dev/sdb1
+# LINUX : LVM - Comment mirrorer/copier un volume ?
 
-* ajouter un PV pour ajouter un mirroring ?
+<br>
 
+* inversement, comment mirroré un LV simple ?
+
+```
+lvconvert -m 1 /dev/vg_data/lv_xavki /dev/sdc1
+```
+
+----------------------------------------------------------------------------------------------------
+
+# LINUX : LVM - Comment mirrorer/copier un volume ?
+
+<br>
+
+* comment ajouter un PV pour ajouter un mirroring ?
+
+```
 vgextend vg_data /dev/sdd1
 lvconvert -m 2 /dev/vg_data/lv_xavki /dev/sdd1
-
-
+```
