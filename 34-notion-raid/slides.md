@@ -4,6 +4,7 @@
 
 # LINUX : Les RAID
 
+<br>
 
 RAID : Redundant Array of Independent Disks
 
@@ -11,6 +12,12 @@ RAID : Redundant Array of Independent Disks
 
 1987 : technologie RAID (Berkeley)
 
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
+<br>
 
 Intérêts ?
 
@@ -20,12 +27,19 @@ Intérêts ?
 
 	* redondance des données (si perte de disque ou erreurs)
 
+<br>
 
 Prérequis : 
 
 	* avoir plusieurs disques
 
 	* le nombre dépend du choix de RAID
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
+<br>
 
 Type de contrôles :
 
@@ -41,12 +55,58 @@ Type de contrôles :
 
 			* consommation de ressources systèmes
 
-	* matériel
+------------------------------------------------------------------------------
 
+# LINUX : Les RAID
+
+<br>
+
+	* matériel semi-matériel : 
+			routines en dehors de l'OS
+			pas indépendant
+
+			* éviter la dépendance au système d'exploitation
+
+			* idéal pour des fichiers externes à celui-ci
+
+			* consommaion de ressources (système non dédié)
+
+			* difficultés de changement de carte-mère
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
+<br>
+
+	* matériel :
+			processeur, mémoire, batterie dédiés
+
+			* détection de problèmes matériels
+
+			* préservation des ressources
+
+			* opérations en arrière plan (check, diag...)
+
+			* pas de compatibilité entre les controleurs
+
+			* le coût
+
+			* haute dispo nécessaire 
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
 
 <br>
 
 RAID 0
+
+	A1	A2
+	B2	B1
+	C1	C2
+
+	* disques entrelacés 
 
 	* strippé (cf vidéo LVM strippé)
 
@@ -54,9 +114,21 @@ RAID 0
 
 	* amélioration sensible des performances
 
+	* taille est égale au plus petit des disques (même capacité)
+
+	* risque de perte x2 (perte 1 disque = perte totale)
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
 <br>
 
 RAID 1
+
+	A1	A1
+	B1	B1
+	C1	C1
 
 	* mirroré (duplication)
 
@@ -70,9 +142,23 @@ RAID 1
 
 	* réduction de perf en écriture (légère)
 
+	* capacité = plsu petit des disques
+
+	* risque divisé par 2
+
+	* augmentation du coût
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
 <br>
 
 RAID 10
+
+		
+	A1	A1	|	A2	A2
+	B2	B2	|	B1	B1
 
 	* 4 disques requis
 
@@ -82,11 +168,19 @@ RAID 10
 	
 	* cumul des atouts des RAID 0 & 1 (perf et redondance)
 
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
 <br>
 
 RAID 5
 
-	* 3 disques (2 datas & 1 parité)
+	A1	A2	P
+	B1	P		B2
+	P		C1	C2
+
+	* 3 disques (n blocs de données & 1 parité par disque)
 
 	* mirroré et strippé mais avec des informations de parités
 			* algo de parité
@@ -98,6 +192,12 @@ RAID 5
 	* sur failure pas de perte de l'Array mais reconstruction
 
 	* perte de données si perte de 2 disques
+
+------------------------------------------------------------------------------
+
+# LINUX : Les RAID
+
+<br>
 
 RAID 6
 
