@@ -18,11 +18,16 @@ mdadm --manage /dev/md0 --fail /dev/sdc1
 mdadm --manage /dev/md0 --remove /dev/sdc1
 ```
 
+<br>
+
 * remettre
 
 ```
 mdadm --manage /dev/md0 --re-add /dev/sdc1
+mdadm --manage /dev/md0 --add /dev/sdc1
 ```
+
+<br>
 
 * si nécessaire
 
@@ -51,65 +56,15 @@ cat /proc/mdstat
 * si remplacement direct
 
 ```
-mdadm --manage /dev/md0 --replace /dev/sdc1 --with /dev/sdd1
-```
-
--------------------------------------------------------------------
-
-# LINUX : RAID 1 - Ajout / Suppression de disques
-
-<br>
-
-* augmenter le nombre de disques mirrorés
-
-```
-mdadm --grow /dev/md0 --raid-devices 3 --add /dev/sdc1
-mdadm -D /dev/md0
-```
-
-Attention : en raid 1 pas d'extension de volume de la grappe
-	ex : si raid 0 > extension du volume > resize2fs
-
--------------------------------------------------------------------
-
-# LINUX : RAID 1 - Ajout / Suppression de disques
-
-<br>
-
-* stopper un array Raid
-
-```
-mdadm --stop /dev/md0
-mdadm --stop --scan
+mdadm --manage /dev/md0 --add /dev/sde1
+mdadm --manage /dev/md0 --replace /dev/sdc1 --with /dev/sde1
 ```
 
 <br>
 
-* redémarrer un array
+* étendre
 
 ```
-mdadm --assemble /dev/md0
-mdadm --assemble --scan
+mdadm --grow /dev/md0 --raid-devices 4 --add /dev/sde1
 ```
 
--------------------------------------------------------------------
-
-# LINUX : RAID 1 - Ajout / Suppression de disques
-
-<br>
-
-* passer en read-only
-
-```
-umount /dev/md0
-mdadm --manage /dev/md0 --readonly
-mount /dev/md0
-```
-
-<br>
-
-* repasser en lecture/écriture
-
-```
-mdadm --manage /dev/md0 --readwrite
-```
