@@ -1,0 +1,3 @@
+smartctl
+wipefs
+# sfdisk -d /dev/sda | sfdisk /dev/sdb
