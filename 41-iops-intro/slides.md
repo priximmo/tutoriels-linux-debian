@@ -9,7 +9,9 @@
 
 * I/O = Input/Output
 
-* Disk IO
+* Disk IO (sous toute leur forme)
+
+* stockage = HDD / SSD / NAS (NET)
 
 * Input = écriture
 
@@ -23,15 +25,16 @@
 
 * data transfert
 
+Les Mesures : 
+
+* IOPS => lecture/écriture par seconde (en nombre)
+
+* KB/s (MB/s) => un débit (quantité par seconde)
+
+-----------------------------------------------------------------------
 <br>
 
-* unités : 
-		* MB/s,KB/s
-		* opérations par seconde
-
-<br>
-
-* point important de performance :
+* point ultra important de performance :
 		* base de données
 		* traitement de tâches généralement
 
@@ -51,18 +54,21 @@ Représentation :
 		* Buffer = écriture
 		* Cache  = lecture
 
+-----------------------------------------------------------------------
+
+# LINUX : I/O
+
 <br>
 
 Impacts importants :
 
 		* lenteurs applications
 
-		* traitement des tâches
-
 		* saturation des CPU 
 
 		* saturation de la RAM
 
+<br>
 
 Indicateur principal :
 
@@ -106,18 +112,9 @@ Indicateur principal :
 
 		* taille des blocs (différents niveaux)
 
-<br>
+-----------------------------------------------------------------------
 
-
-* stockage = HDD / SSD / NAS (NET)
-
-<br>
-
-Les Mesures : 
-
-* IOPS => lecture/écriture par seconde (en nombre)
-
-* KB/s (MB/s) => un débit (quantité par seconde)
+# LINUX : I/O
 
 <br>
 

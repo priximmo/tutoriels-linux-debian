@@ -19,16 +19,58 @@ mkfs.ext4 /dev/md0
 mount /dev/md0 /srv/xavki
 #echo '/dev/md0 /mnt/md0 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
 df -h
+```
 
+---------------------------------------------------------------------------------------------
+
+# LINUX : RAID 0 - 5 - 10
+
+<br>
+
+* clean
+
+```
 dd if=/dev/zero of=/dev/sda bs=1M count=1024
 mdadm --zero-superblock /dev/sdb1
 mdadm --remove /dev/md0
 cp /etc/mdadm/mdadm.conf /etc/mdadm/mdadm.conf.bak
+```
 
+---------------------------------------------------------------------------------------------
+
+# LINUX : RAID 0 - 5 - 10
+
+
+<br>
+
+* raid 5
+
+```
 sudo mdadm --create --verbose /dev/md0 --level=5 --raid-devices=3 /dev/sda /dev/sdb /dev/sdc
+```
+
+---------------------------------------------------------------------------------------------
+
+# LINUX : RAID 0 - 5 - 10
 
 
+<br>
+
+* raid 6
+
+```
 sudo mdadm --create --verbose /dev/md0 --level=6 --raid-devices=4 /dev/sda /dev/sdb /dev/sdc /dev/sdd
+```
+
+---------------------------------------------------------------------------------------------
+
+# LINUX : RAID 0 - 5 - 10
 
 
+<br>
+
+* raid 10
+
+```
 sudo mdadm --create --verbose /dev/md0 --level=10 --raid-devices=4 /dev/sda /dev/sdb /dev/sdc /dev/sdd
+```
