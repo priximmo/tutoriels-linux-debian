@@ -31,7 +31,6 @@ Les Mesures :
 
 * KB/s (MB/s) => un débit (quantité par seconde)
 
------------------------------------------------------------------------
 <br>
 
 * point ultra important de performance :
@@ -80,7 +79,6 @@ Indicateur principal :
 
 		* processus status = D (tâche non interruptible)
 
-	
 -----------------------------------------------------------------------
 
 # LINUX : I/O
