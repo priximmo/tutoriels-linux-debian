@@ -1,3 +1,28 @@
 smartctl
 wipefs
-# sfdisk -d /dev/sda | sfdisk /dev/sdb
+pidstat
+
+
+19946  dd if=/dev/zero of=/tmp/100M-of-zeroes bs=1024k count=100
+19947  losetup --show --find /tmp/100M-of-zeroes
+19948  sudo losetup --show --find /tmp/100M-of-zeroes
+19949  blockdev --getsize /dev/loop18
+19950  sudo blockdev --getsize /dev/loop18
+19951  sudo blockdev /dev/loop18
+19952  sudo blockdev --all /dev/loop18
+19953  echo "0 204800 delay /dev/loop18 0 200" | dmsetup create dm-slow
+19954  echo "0 204800 delay /dev/loop18 0 200" | sudo dmsetup create dm-slow
+19955  df -h
+19956  dd if=/dev/mapper/dm-slow of=/dev/null count=25000
+19957  sudo dd if=/dev/mapper/dm-slow of=/dev/null count=25000
+19958  lsblk
+19959  sudo mkdir /tmp/xavki
+19960  sudo mount /dev/mapper/dm-slow /tmp/xavki/
+19961  sudo mkfs.ext4 /dev/mapper/dm-slow
+19962  sudo mount /dev/mapper/dm-slow /tmp/xavki/
+19963  df -h
+19964  sudo dd if=/dev/urandom of=/tmp/xavki/random.img count=100 bs=1M
+19965  sudo dd if=/dev/urandom of=/tmp/random.img count=100 bs=1M
+
+sudo dmsetup remove dm-slow ; sudo losetup -d /dev/loop18
+
