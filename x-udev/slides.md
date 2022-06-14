@@ -15,4 +15,5 @@
 
 
 
-
+ oki@doki ~/gitlab.com/linux (master) $ ▶ udevadm 
+control       info          monitor       settle        test          test-builtin  trigger  
