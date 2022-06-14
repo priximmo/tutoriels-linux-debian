@@ -17,3 +17,6 @@
 
  oki@doki ~/gitlab.com/linux (master) $ ▶ udevadm 
 control       info          monitor       settle        test          test-builtin  trigger  
+
+
+https://www.thegeekdiary.com/how-to-set-custom-device-names-using-udev-in-centos-rhel-7/
