@@ -2,6 +2,8 @@ smartctl
 wipefs
 pidstat
 
+swap
+
 
 19946  dd if=/dev/zero of=/tmp/100M-of-zeroes bs=1024k count=100
 19947  losetup --show --find /tmp/100M-of-zeroes
