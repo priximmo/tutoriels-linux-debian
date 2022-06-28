@@ -2,10 +2,15 @@
 %author: xavki
 
 
-# LINUX : Redirections & Pipe & tee & EOF
+# LINUX : Redirections & Pipe & tee
 
 
 <br>
+
+* Rediriger les flux (cf vidéo précédente stdin/stderr/stdout)
+		* interaction avec le terminal	
+
+
 
 
 ```

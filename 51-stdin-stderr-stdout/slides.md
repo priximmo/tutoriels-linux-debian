@@ -7,17 +7,19 @@
 
 <br>
 
-file descriptor (FD) : fichiers numérotés et réservés
-		* moyens d'échanges/communication
-		* chaque process dispose de ses files descriptors
-		* à retrouver dans /proc/<pid>/fd/1...
-		* potentiellement communicable entre programmes
-		* un fichier lu est représenté sous forme de FD à sa lecture
-		* par opposition à la socket descriptor (réseau)
+* pour chaque programme
 
-```
-man open
-```
+* 3 streams (canaux de communications) :
+
+		* entrées
+
+		* sorties
+
+		* erreurs
+
+---------------------------------------------------------------
+
+# LINUX : STDIN & STDOUT & STDERR
 
 <br>
 
@@ -28,14 +30,41 @@ stdout (1) : standard output
 stderr (2) : standard error
 
 ```
+man stdout
+```
+
+<br>
+
+* disposent aussi d'un device
+
+```
 ls /dev/std*
 ```
 
+---------------------------------------------------------------
 
-file descriptor :
+# LINUX : STDIN & STDOUT & STDERR
 
-3-9 : usage temporaire
+<br>
 
+file descriptor (FD) : fichiers numérotés et réservés
+		* moyens d'échanges/communication
+		* chaque process dispose de ses files descriptors
+		* à retrouver dans /proc/<pid>/fd/1...
+		* potentiellement communicable entre programmes
+		* ex : un fichier lu/sortie est représenté sous forme de FD à sa lecture
+		* par opposition à la socket descriptor (réseau)
+		* 0/1/2 et 3-9 (temporaires)
+
+```
+man open
+```
+
+---------------------------------------------------------------
+
+# LINUX : STDIN & STDOUT & STDERR
+
+<br>
 
 * stdin & stdout
 
@@ -47,6 +76,12 @@ read
 echo $REPLY
 ```
 
+---------------------------------------------------------------
+
+# LINUX : STDIN & STDOUT & STDERR
+
+<br>
+
 * stderr
 
 ```
@@ -55,16 +90,28 @@ ls * toto  2>/dev/null
 ls * toto 2>&1 >/dev/null
 ```
 
+<br>
+
 ```
 cat <<EOF 
 toto
 EOF
 ```
 
+---------------------------------------------------------------
+
+# LINUX : STDIN & STDOUT & STDERR
+
 ```
 echo $$
 sudo cat /proc/16806/fd/0
 ```
+
+---------------------------------------------------------------
+
+# LINUX : STDIN & STDOUT & STDERR
+
+<br>
 
 ```
 exec 7<<EOF
@@ -73,6 +120,3 @@ EOF
 read -u 7
 echo $REPLY
 ```
-
-
-https://medium.com/100-days-of-linux/input-output-redirection-in-linux-56571b7c201c
