@@ -1,5 +1,0 @@
-.:
-output.txt
-slides.md
-stderr.txt
-stdout.txt
