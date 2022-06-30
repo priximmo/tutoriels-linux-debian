@@ -1,5 +1,5 @@
 .:
+output.txt
 slides.md
 stderr.txt
-stdout.xt
-test.xt
+stdout.txt

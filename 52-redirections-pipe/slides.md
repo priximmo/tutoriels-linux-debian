@@ -76,7 +76,8 @@ ls . nothing 2> stderr.txt 1> stdout.xt
 
 ```
 ls /tmp 2>&1 > output.txt
-ls nothing &> test.txt
+cp toto titi &> /dev/null
+ls nothing 2>/dev/null
 ```
 
 Note : attention l'ordre compte
@@ -92,6 +93,8 @@ Note : attention l'ordre compte
 ```
 ls < stdout.xt
 ls . nothing 2> stderr.txt 1> stdout.new < stdout.xt 
+ls * nothing 2>/dev/fd/1 1> /dev/null
+sort < b.txt > c.txt
 ```
 
 * idem à :
@@ -114,7 +117,7 @@ ls nothing && echo toto
 
 <br>
 
-* combiner avec/sans erreur
+* combiner avec erreur
 
 ```
 ls nothing || echo toto

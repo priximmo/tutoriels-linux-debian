@@ -23,7 +23,7 @@
 
 <br>
 
-sdtin (0) : standard input
+stdin (0) : standard input
 
 stdout (1) : standard output
 
