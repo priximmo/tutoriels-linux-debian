@@ -65,3 +65,16 @@ grep -ri "LOCAL"
 grep -ri "LOCAL" /etc/
 grep -ri "LOCAL" /etc/hosts /etc/resolv.conf
 ```
+
+* -E : pattern regexp
+
+```
+grep -E "(127|192).(0|168).[01].[176]" /etc/hosts
+egrep "127.0.[01].1" /etc/hosts
+```
+
+* -m : limiter aux x premiers lignes sélectionnées
+
+```
+grep -E -m 2 "(127|192).(0|168).[01].[176]" /etc/hosts
+```
