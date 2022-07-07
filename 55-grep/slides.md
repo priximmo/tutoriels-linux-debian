@@ -58,6 +58,8 @@ grep -i -n "LOCAL" /etc/hosts
 grep -i -v "LOCAL" /etc/hosts
 ```
 
+Note : exemple les commentaires
+
 * -r : recherche récursive
 
 ```
@@ -77,4 +79,16 @@ egrep "127.0.[01].1" /etc/hosts
 
 ```
 grep -E -m 2 "(127|192).(0|168).[01].[176]" /etc/hosts
+```
+
+* -l : juste afficher les fichiers contenant le pattern
+
+```
+grep -rl "127" /etc/hosts
+```
+
+* -A/-B : nombre de lignes après / nombre de lignes avant
+
+```
+grep -A2 -B1 "5" test.txt
 ```
