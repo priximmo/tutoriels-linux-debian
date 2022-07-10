@@ -13,6 +13,8 @@
 blkid
 ```
 
+<br>
+
 * lister les blockdevices
 
 ```
@@ -22,11 +24,23 @@ lsblk -r
 lsblk -d -o name,rota
 ```
 
+------------------------------------------------------------------------
+
+# LINUX : CLI Devices
+
+<br>
+
 * taille, secteurs des disques
 
 ```
 fdisk -l | grep '^Disk /dev/'
 ```
+
+------------------------------------------------------------------------
+
+# LINUX : CLI Devices
+
+<br>
 
 * caractéristiques des disques
 		* SMART : collecte d'informations sur les disques
@@ -41,11 +55,19 @@ sudo smartctl -l selftest  /dev/nvme0n1
 cat /etc/default/smartmontools
 ```
 
+------------------------------------------------------------------------
+
+# LINUX : CLI Devices
+
+<br>
+
 * informations fournies par udev
 
 ```
 sudo udevadm info -a -n /dev/nvme0n1
 ```
+
+<br>
 
 * autres infos
 
@@ -55,6 +77,13 @@ sudo lshw -short -C disk
 cat /sys/block/nvme0n1/queue/rotational
 iostat
 dumpe2fs
+```
+
+------------------------------------------------------------------------
+
+# LINUX : CLI Devices
+
+<br>
 
 * test
 
