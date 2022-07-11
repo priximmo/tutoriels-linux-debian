@@ -2,159 +2,59 @@
 %author: xavki
 
 
-# LINUX : Un PROCESS c'est quoi ??
+# LINUX : Qu'est-ce qu'un fork ?
 
 
 <br>
 
-* process = processus (tasks)
+* programme = un bout de code inerte
+		* du code
+		* des variables
+		* des données
+		* dispose d'un point d'entrée (explicite ou non)
+
+* process = un programme lancé/exécuté
+		* stockage en mémoire (adresses)
+		* réservation/utilisation de ressources (cpu/mémoire)
+		* isolation (ex : redéfinition du contexte)
 
 <br>
 
-* un process = c'est une instance d'un programme (plus ou moins gros/important
+* fork :
+
+	1- lancement du programme
+
+	2- création du process parent (PID parent)
+			* affectation ressources
+			* owner
+			* isolation...
+
+	3- appel fork() (syscall)
+			* copie presque intégrale du process actuel (parent)
+
+	4- identification :
+			* de l'enfant vue du parent (PID)
+			* parent (PPID)
 
 <br>
 
-* c'est un exécutable (permissions)
-
-<br>
-
-* stocké sur la machine (sauf exceptions...)
-
-<br>
-
-* lancer un programme = créer un nouveau processus
-
-<br>
-
-* lancé par un utilisateur (système ou réel)
-
-<br>
-
-* PID = identifiant unique du processus
-
-<br>
-
-* Linux = multitask OS (multiple process en même temps)
-
-https://tldp.org/LDP/tlk/kernel/processes.html
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-
-<br>
-
-* process = processus (tasks)
-
-<br>
-
-* lister les processus : commande ps
+exemple :
 
 ```
-ps 
 echo $$
-ps aux
-ps auxwww
+echo $PPID
+ps aux | grep $PPID
+ps faux
 ```
 
-Note : notre bash/shell est un process
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-<br>
-
-* process / hardware = CPU & Memoire & stockage (lui-même)
-
-Caractéristiques :
-
-<br>
-
-		* un identifiant le PID
-
-<br>
-
-		* adresse en mémoire
-
-<br>
-
-		* un statut : running, stopped, waiting, zombie
-
-<br>
-
-		* un propriétaire (owner qui a lancé le process) - UID
-
-<br>
-
-		* des ressources : cpu/ram
-
-<br>
-
-		* des fichiers utilisés
-
-		* des sockets réseaux (fichiers dédiés à la communication) & des ports
-
-		* des signaux
-
-		* peut attendre :  cpu / io disque / réseau...
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-<br>
-
-PID : 
-
-		* identifiant unique dans le kernel
-
-		* numéro incrémenté par ordre de création
-
-		* isolation entre les processus (sécurité)
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-<br>
-
-PID 1 = Init
-
-		* le père de tous les process (règle Unix)
-
 ```
-ps aux | head -n2
-```
-		* émane de systemD (management des services, montages... sous forme d'unités)
-
-```
-man init
+oki         3180  3.7  1.0 4304660 261788 ?      Ssl  21:07   1:12  \_ /usr/bin/gnome-shell
+oki         3399  0.0  0.0 162700  7136 ?        Sl   21:07   0:00  |   |   \_ ...
+oki         5614  0.9  0.3 841544 73416 ?        Sl   21:24   0:08  |   \_ /usr/bin/python3 /usr/bin/terminator
+oki         7343  0.1  0.0  21316 15400 pts/1    Ss   21:38   0:00  |       \_ /bin/bash
+oki         7504  0.0  0.0  11928  3852 pts/1    R+   21:39   0:00  |           \_ ps faux
 ```
 
-<br>
-
-		* c'est donc la première et la dernière task du système (commande init 0 - arrêt / init 6 - reboot)
-
-		* issue de la phase de boot (cf vidéo précédente)
-
-		* création de processus par fork 
-
-```
-man 2 fork
-```
-
-<br>
-
-		* reaping = s'occupe des processus orphelins (perte des parents)
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
 
 
-<br>
 
-Un peu d'histoire : https://linuxfr.org/news/systemd-l-init-martyrise-l-init-bafoue-mais-l-init-libere
