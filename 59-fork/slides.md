@@ -13,10 +13,17 @@
 		* des données
 		* dispose d'un point d'entrée (explicite ou non)
 
+<br>
+
 * process = un programme lancé/exécuté
 		* stockage en mémoire (adresses)
 		* réservation/utilisation de ressources (cpu/mémoire)
 		* isolation (ex : redéfinition du contexte)
+
+-------------------------------------------------------------------------------------
+
+# LINUX : Qu'est-ce qu'un fork ?
+
 
 <br>
 
@@ -24,10 +31,18 @@
 
 	1- lancement du programme principal
 
+<br>
+
 	2- création du process parent (PID parent)
 			* affectation ressources
 			* owner
 			* isolation...
+
+-------------------------------------------------------------------------------------
+
+# LINUX : Qu'est-ce qu'un fork ?
+
+<br>
 
 	3- appel fork() (syscall)
 			* copie presque intégrale du process actuel (parent)
@@ -35,39 +50,28 @@
 			* code retour = 0 : pour l'enfant
 			* code retour = PID de l'enfant : pour le parent
 
+-------------------------------------------------------------------------------------
+
+# LINUX : Qu'est-ce qu'un fork ?
+
+<br>
+
 	4- identification :
 			* de l'enfant vue du parent (PID)
 			* parent (PPID)
 			* parent lance wait() (attente de l'enfant)
 
-	5- l'enfant termine (exit)
+<br>
 
-	6- le parent lève le wait (signal SIGCHLD) et continue
+	5- l'enfant termine (exit)
 
 <br>
 
-* Process suite :
+	6- le parent lève le wait (signal SIGCHLD) et continue
 
-		* cat /proc/1/status
-		* 2 > 32767
-		* pid 0 : swaper ou scheduler (responsable du paging)
-		* pid_max
+-------------------------------------------------------------------------------------
 
-```
-pid_max = min(pid_max_max, max_t(int, pid_max,
-           PIDS_PER_CPU_DEFAULT * num_possible_cpus()));
-```
-
-https://elixir.bootlin.com/linux/v4.7.10/source/kernel/pid.c#L595
-
-		* ses file descriptors
-
-```
-less slides.md
-ps aux | grep slides
-ls -la /proc/<pid>/fd
-```
-
+# LINUX : Qu'est-ce qu'un fork ?
 
 <br>
 
@@ -88,29 +92,36 @@ oki         7343  0.1  0.0  21316 15400 pts/1    Ss   21:38   0:00  |       \_ /
 oki         7504  0.0  0.0  11928  3852 pts/1    R+   21:39   0:00  |           \_ ps faux
 ```
 
+-------------------------------------------------------------------------------------
 
-* status d'un process
+# LINUX : Qu'est-ce qu'un fork ?
 
-	* new
-	* ready
-	* running
-	* waiting
-	* terminated
+<br>
 
+* Process suite :
+
+		* cat /proc/1/status
+		* 2 > 32767 (proportionnel aux coeurs)
+		* pid 0 : swaper ou scheduler (responsable du paging)
+		* pid_max
 
 ```
-                ┌─────────────┐
-    NEW         │ Scheduler   │      TERMINATED
-     │          └─────────────┘           ▲
-     │                                    │
-     └────► READY ────────► RUNNING ──────┘
-             ▲                 │
-             │                 │    ┌───────┐
-             │                 │    │ EXIT  │
-             └──── WAITING ◄───┘    └───────┘
-
-            ┌───────────────────┐
-            │  IO or Events     │
-            └───────────────────┘
+pid_max = min(pid_max_max, max_t(int, pid_max,
+           PIDS_PER_CPU_DEFAULT * num_possible_cpus()));
 ```
 
+https://elixir.bootlin.com/linux/v4.7.10/source/kernel/pid.c#L595
+
+-------------------------------------------------------------------------------------
+
+# LINUX : Qu'est-ce qu'un fork ?
+
+<br>
+
+		* ses file descriptors
+
+```
+less slides.md
+ps aux | grep slides
+ls -la /proc/<pid>/fd
+```
