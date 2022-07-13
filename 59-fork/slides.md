@@ -22,7 +22,7 @@
 
 * fork :
 
-	1- lancement du programme
+	1- lancement du programme principal
 
 	2- création du process parent (PID parent)
 			* affectation ressources
@@ -31,10 +31,43 @@
 
 	3- appel fork() (syscall)
 			* copie presque intégrale du process actuel (parent)
+			* code retour < 0 : errreur
+			* code retour = 0 : pour l'enfant
+			* code retour = PID de l'enfant : pour le parent
 
 	4- identification :
 			* de l'enfant vue du parent (PID)
 			* parent (PPID)
+			* parent lance wait() (attente de l'enfant)
+
+	5- l'enfant termine (exit)
+
+	6- le parent lève le wait (signal SIGCHLD) et continue
+
+<br>
+
+* Process suite :
+
+		* cat /proc/1/status
+		* 2 > 32767
+		* pid 0 : swaper ou scheduler (responsable du paging)
+		* pid_max
+
+```
+pid_max = min(pid_max_max, max_t(int, pid_max,
+           PIDS_PER_CPU_DEFAULT * num_possible_cpus()));
+```
+
+https://elixir.bootlin.com/linux/v4.7.10/source/kernel/pid.c#L595
+
+		* ses file descriptors
+
+```
+less slides.md
+ps aux | grep slides
+ls -la /proc/<pid>/fd
+```
+
 
 <br>
 
@@ -56,5 +89,28 @@ oki         7504  0.0  0.0  11928  3852 pts/1    R+   21:39   0:00  |           
 ```
 
 
+* status d'un process
 
+	* new
+	* ready
+	* running
+	* waiting
+	* terminated
+
+
+```
+                ┌─────────────┐
+    NEW         │ Scheduler   │      TERMINATED
+     │          └─────────────┘           ▲
+     │                                    │
+     └────► READY ────────► RUNNING ──────┘
+             ▲                 │
+             │                 │    ┌───────┐
+             │                 │    │ EXIT  │
+             └──── WAITING ◄───┘    └───────┘
+
+            ┌───────────────────┐
+            │  IO or Events     │
+            └───────────────────┘
+```
 
