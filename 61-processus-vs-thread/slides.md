@@ -2,159 +2,166 @@
 %author: xavki
 
 
-# LINUX : Un PROCESS c'est quoi ??
+# LINUX : Process vs Fork vs Thread
 
 
 <br>
 
-* process = processus (tasks)
+Linux : OS multitâches et préemptif
+		* démarrer
+		* stopper
+		* reprendre
+
+Rôle du scheduler
 
 <br>
 
-* un process = c'est une instance d'un programme (plus ou moins gros/important
+1 core : pas de parallélisation
+
+On parle de "simultanéité apparente"
+
+Du coup, le scheduler intègre une priorisation
 
 <br>
 
-* c'est un exécutable (permissions)
+démarrer/stopper/reprendre = context switching (commutation de contexte)
+		* l'enjeu est de fixer l'état du process suspendu
+		* pour pouvoir le reprendre où il en était
 
-<br>
 
-* stocké sur la machine (sauf exceptions...)
+----------------------------------------------------------------------------------
 
-<br>
-
-* lancer un programme = créer un nouveau processus
-
-<br>
-
-* lancé par un utilisateur (système ou réel)
-
-<br>
-
-* PID = identifiant unique du processus
-
-<br>
-
-* Linux = multitask OS (multiple process en même temps)
-
-https://tldp.org/LDP/tlk/kernel/processes.html
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
+# LINUX : Process vs Fork vs Thread
 
 
 <br>
 
-* process = processus (tasks)
+Processus/Fork :
 
-<br>
-
-* lister les processus : commande ps
 
 ```
-ps 
-echo $$
-ps aux
-ps auxwww
+     ┌──────────────────┐
+     │                  │
+     │    Pile (Stack)  │ Variables locales & retours de Fonctions
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │   Bibliothèques  │	Lib partagées
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │   Tas (Heap)     │	Variables non ordonnées/vrac
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │  Données (Datas) │	Variables globales
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │   Code (Text)    │	Code à exécuter
+     │                  │
+     └──────────────────┘
 ```
 
-Note : notre bash/shell est un process
+----------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------------------------
+# LINUX : Process vs Fork vs Thread
 
-# LINUX : Un PROCESS c'est quoi ??
-
-<br>
-
-* process / hardware = CPU & Memoire & stockage (lui-même)
-
-Caractéristiques :
 
 <br>
 
-		* un identifiant le PID
+		* fonction fork() et wait()
+<br>
+
+		* processus fils
+<br>
+
+		* PID différents entre père et fils
+<br>
+
+		* copie similaire au process parent (même variables et code par ex)
+<br>
+
+		* valeurs différenciées via l'utilisation du PID
+<br>
+
+		* par exemple au fork() COPIE des files descriptors
+<br>
+
+		* mais différenciation après
+<br>
+
+		* communication entre processus (plus coûteux)
+
+
+----------------------------------------------------------------------------------
+
+# LINUX : Process vs Fork vs Thread
+
 
 <br>
 
-		* adresse en mémoire
-
-<br>
-
-		* un statut : running, stopped, waiting, zombie
-
-<br>
-
-		* un propriétaire (owner qui a lancé le process) - UID
-
-<br>
-
-		* des ressources : cpu/ram
-
-<br>
-
-		* des fichiers utilisés
-
-		* des sockets réseaux (fichiers dédiés à la communication) & des ports
-
-		* des signaux
-
-		* peut attendre :  cpu / io disque / réseau...
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-<br>
-
-PID : 
-
-		* identifiant unique dans le kernel
-
-		* numéro incrémenté par ordre de création
-
-		* isolation entre les processus (sécurité)
-
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-<br>
-
-PID 1 = Init
-
-		* le père de tous les process (règle Unix)
+Thread :
 
 ```
-ps aux | head -n2
+     ┌──────────────────┐
+     │    Pile1         │
+     │    Pile2         │ Variables locales & retours de Fonctions
+     │    Pile3         │
+     ├──────────────────┤
+     │                  │
+     │   Bibliothèques  │ Lib partagées
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │   Tas (Heap)     │ Variables temporaires/vrac
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │  Données (Datas) │ Variables globales
+     │                  │
+     ├──────────────────┤
+     │                  │
+     │   Code (Text)    │ Code à exécuter
+     │                  │
+     └──────────────────┘
 ```
-		* émane de systemD (management des services, montages... sous forme d'unités)
 
-```
-man init
-```
+----------------------------------------------------------------------------------
+
+# LINUX : Process vs Fork vs Thread
+
 
 <br>
 
-		* c'est donc la première et la dernière task du système (commande init 0 - arrêt / init 6 - reboot)
+		* en apparence similaire à un processus
+<br>
 
-		* issue de la phase de boot (cf vidéo précédente)
+		* même mémoire
+<br>
 
-		* création de processus par fork 
+		* identification : Thread Group ID (PID)  et Thread ID 
+<br>
 
-```
-man 2 fork
-```
+		* cependant les variables et FD sont partagées en mémoire
+<br>
+
+		* économie de commutation de contexte (la mémoire reste la même)
+<br>
+
+		* communication simplifiée car mémoire partagée
+<br>
+
+		* si perte du père perte des threads
+<br>
+
+		* le thread n'est pas tout le contenu du code du père
+		* juste une fonction (plus léger qu'un fork)
+		* délégation de certaines petites tâches au thread
+		* optimisé par le multitâche et donc pseudo-paralélisation (de tâches diff)
 
 <br>
 
-		* reaping = s'occupe des processus orphelins (perte des parents)
+		* certains problèmes : modification en parallèle des variables en mémoire
+		* solutions existent (mutex = priorisation)
 
------------------------------------------------------------------------------------------------------------
-
-# LINUX : Un PROCESS c'est quoi ??
-
-
-<br>
-
-Un peu d'histoire : https://linuxfr.org/news/systemd-l-init-martyrise-l-init-bafoue-mais-l-init-libere
