@@ -2,70 +2,60 @@
 %author: xavki
 
 
-# LINUX : Process & Priorités (niceness)
+# LINUX : PROC, le pseudo-fs
 
 
 <br>
 
-* Linux : OS Multitâches & Preemptive
-
-* Management des tâches par le scheduler
-
-* outil : nice (ionice pour les io)
-
--------------------------------------------------------------------------
-
-# LINUX : Process & Priorités (niceness)
-
-<br>
-
-NICE :
-
-<br>
-
-		* nice : combien tu es "nice" avec les autres ??
-<br>
-
-		* nombre entre -20 et +19
-
-<br>
-
-		* plus la valeur est haute = moins prioritaire (become nice ;) )
-
-<br>
-
-		* plus la valeur est faible ou inf à 0 = plus prioritaire (less nice)
-
-<br>
-
-		* moins utilisé (capacités des CPU et scheduler)
-
-<br>
-
-		* valeur hérité du parent
-	
-<br>
-
-		* sécurité : un owner du process ne peut que augmenter la valeur ;) (devenir root)
-
--------------------------------------------------------------------------
-
-# LINUX : Process & Priorités (niceness)
-
-<br>
-
-* lançons un process
+* qu'est-ce que fait PS ??
 
 ```
-nice -n 5 /usr/bin/sleep infinity
+strace -e openat ps
 ```
 
-* si process déjà existant
+-----------------------------------------------
+
+# LINUX : PROC, le pseudo-fs
+
+
+<br>
+
+* du coup regardons un peu /proc
+
+* quelques génériques
 
 ```
-renice 10 $(pgrep sleep)
-ps -l $(pgrep sleep)
-renice 11 $(pgrep sleep)
-renice 5 $(pgrep sleep)
-sudo renice 5 $(pgrep sleep)
+cat /proc/version
+cat /proc/cmdline
+cat /proc/uptime
+cat /proc/loadavg
+cat /proc/cpuinfo
+cat /proc/meminfo
+cat /proc/vmstat
+cat /proc/diskstats
+cat /proc/stat
+```
+
+-----------------------------------------------
+
+# LINUX : PROC, le pseudo-fs
+
+
+<br>
+
+* pour chaque process
+
+```
+ls /proc/$(pgrep sleep)/
+cat /proc/xx/cmdline
+cat /proc/xx/cwd
+cat /proc/xx/environ
+cat /proc/xx/exe
+cat /proc/xx/fdinfo/1
+ls /proc/xx/fd/
+cat /proc/xx/oom_score
+cat /proc/xx/cgroup
+cat /proc/xx/ns
+cat /proc/xx/stat
+cat /proc/xx/statm
 ```
