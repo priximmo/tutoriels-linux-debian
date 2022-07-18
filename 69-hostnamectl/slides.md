@@ -23,6 +23,22 @@ Note : si modif de sysctl non préservé au reboot
 
 <br>
 
+* la commande hostname
+
+```
+hostname
+hostname -i
+hostname -I
+hostname -d
+hostname -f
+```
+
+--------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Hostname & HostnameCTL
+
+<br>
+
 
 * un daemon hostnamed géré via un service (unité)
 
