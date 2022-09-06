@@ -47,6 +47,8 @@ Restart=on-failure (exit != 0)
 
 Note: mais nécessité de prise en compte du comportement du programmea
 
+Restart=on-abnormal
+no
 ----------------------------------------------------------------------------------
 
 # LINUX : SYSTEMD - Propriétés de restart & Fails
@@ -120,3 +122,8 @@ OnFailure=my-app-recovery.service
 
 
 systemctl reset-failed my-app
+
+
+
+
+
