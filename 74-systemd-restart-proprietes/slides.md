@@ -2,7 +2,7 @@
 %author: xavki
 
 
-# LINUX : SYSTEMD - Propriétés de restart
+# LINUX : SYSTEMD - Propriétés de Restarts & Fails
 
 
 <br>
@@ -11,15 +11,63 @@
 man systemd.service
 ```
 
-Objectif : comment apprécier le caractère actif du service ?
+Objectif : comment permettre de l'auto-guerisson de vos services ?
 
 ----------------------------------------------------------------------------------
 
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+<br>
+
+Deux endroits pour ajouter des propriétés :
+
+	* le [Unit]
+
+	* le [Service]
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+[Service]
+
+<br>
+
+* le simple restart peu importe l'exit
+
+```
 Restart=always (exit)
+```
+
+* le simple restart sur un fail (exi diff de 0)
+
+```
 Restart=on-failure (exit != 0)
+```
 
-RestartSec=1 (temps d'attente en seconde pour restart)
+Note: mais nécessité de prise en compte du comportement du programmea
 
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+[Service]
+
+<br>
+
+* temps d'attente entre les restarts (valeur par défaut)
+
+```
+RestartSec=1
+```
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+[Unit]
+
+<br>
 
 * défaut si Restart=always
 
