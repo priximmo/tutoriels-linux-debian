@@ -25,6 +25,16 @@ Deux endroits pour ajouter des propriétés :
 
 	* le [Service]
 
+```
+[Unit]
+Description=My app Hello
+[Service]
+ExecStart=/usr/bin/sleep 10s
+[Install]
+WantedBy=multi-user.target
+```
+
+
 ----------------------------------------------------------------------------------
 
 # LINUX : SYSTEMD - Propriétés de restart & Fails
@@ -33,7 +43,7 @@ Deux endroits pour ajouter des propriétés :
 
 <br>
 
-* le simple restart peu importe l'exit
+* le simple restart peu importe l'exit (exemple : sleep)
 
 ```
 Restart=always (exit)
@@ -48,7 +58,7 @@ Restart=on-failure (exit != 0)
 Note: mais nécessité de prise en compte du comportement du programmea
 
 Restart=on-abnormal
-no
+
 ----------------------------------------------------------------------------------
 
 # LINUX : SYSTEMD - Propriétés de restart & Fails
@@ -67,6 +77,22 @@ RestartSec=1
 
 # LINUX : SYSTEMD - Propriétés de restart & Fails
 
+
+[Service]
+
+<br>
+
+* limiter la durée d'un service (mais restart potentiel)
+
+```
+[Service]
+RuntimeMaxSec=180s
+```
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+
 [Unit]
 
 <br>
@@ -81,49 +107,76 @@ Rq : et si RestartSec=3 > jamais les 5 fois :)
 
 La solution simple qui fonctionne toujours est de définir StartLimitIntervalSec=0. 
 
-RestartSec à au moins 1 seconde, pour éviter de mettre trop de stress
+RestartSec à au moins 5 secondes, pour éviter de mettre trop de stress
 
-StartLimitAction=reboot > redémarrage du serveur
+----------------------------------------------------------------------------------
 
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+[Unit]
+
+<br>
+
+* pour limiter le nombre de restart (2)
+
+```
+[Unit]
+Description=My app Hello
+StartLimitBurst=2
+StartLimitIntervalSec=300
+[Service]
+ExecStart=/usr/bin/sleep 10s
+Restart=always
+RestartSec=5s
+[Install]
+WantedBy=multi-user.target
+```
+
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+
+[Unit]
+
+<br>
+
+* pour cadencer les restart sans les limiter du tout
+
+```
+[Unit]
+Description=My app Hello
+StartLimitBurst=2
+StartLimitIntervalSec=300
+[Service]
+ExecStart=/usr/bin/sleep 10s
+Restart=always
+RestartSec=5s
+[Install]
+WantedBy=multi-user.target
+```
+
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Propriétés de restart & Fails
+
+
+[Unit]
+
+<br>
+
+* redémarrer le serveur en cas de fail :
+
+```
 [Unit]
 Description=My App
 StartLimitIntervalSec=30
 StartLimitBurst=2
 FailureAction=reboot
-
---no-pager
-
-RuntimeMaxSec=180s
-
-
-```
-[Unit]
-Description=Your Daemon
-After=network-online.goal
-Needs=network-online.goal systemd-networkd-wait-online.service
-
-StartLimitIntervalSec=500
-StartLimitBurst=5
-
-[Service]
-Restart=on-failure
-RestartSec=5s
 ```
 
-
-
-[Unit]
-Description=My App
-StartLimitIntervalSec=30
-StartLimitBurst=2
-OnFailure=my-app-recovery.service
-
-
-
-
-systemctl reset-failed my-app
-
-
-
-
+SuccessAction
+StartLimitAction=reboot > reboot si startlimitaction activé (burst/interval)
 
