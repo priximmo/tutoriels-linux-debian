@@ -88,6 +88,7 @@ RestartSec=1
 [Service]
 RuntimeMaxSec=180s
 ```
+
 ----------------------------------------------------------------------------------
 
 # LINUX : SYSTEMD - Propriétés de restart & Fails
@@ -99,9 +100,11 @@ RuntimeMaxSec=180s
 
 * défaut si Restart=always
 
+```
 [Unit]
 StartLimitBurst=5 (nombre de fois en fail)
 StartLimitIntervalSec=10 (5 fois dans l'interval de 10s)
+```
 
 Rq : et si RestartSec=3 > jamais les 5 fois :)
 
@@ -177,6 +180,7 @@ StartLimitBurst=2
 FailureAction=reboot
 ```
 
-SuccessAction
+SuccessAction=
 StartLimitAction=reboot > reboot si startlimitaction activé (burst/interval)
+OnFailure=my-app-recovery.service
 
