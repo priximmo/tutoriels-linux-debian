@@ -11,13 +11,13 @@
 man systemd.service
 ```
 
-Objectif : comment permettre de l'auto-guerisson de vos services ?
+Objectif : comment permettre une dépendance entre vos services ?
 
 * gérées par le [Unit]
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 <br>
 
@@ -35,7 +35,7 @@ WantedBy=multi-user.target
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 <br>
 
@@ -63,7 +63,7 @@ systemctl list-dependencies test.service --all --reverse
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 
 <br>
@@ -85,12 +85,12 @@ Requisite : n'inclus pas de notion d'ordre (même transaction > After)
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 
 <br>
 
-PartOf : dépendance parent au restart et stop
+PartOf : dépendance au restart et stop
 
 * start de hello1 rien sur hello2
 
@@ -110,7 +110,7 @@ systemctl stop hello1
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 
 <br>
@@ -143,7 +143,7 @@ systemctl stop hello1
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 
 <br>
@@ -164,7 +164,7 @@ kill -9 <pid_service_listé>
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Les Dépendances
 
 
 <br>
