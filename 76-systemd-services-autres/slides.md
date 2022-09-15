@@ -2,7 +2,7 @@
 %author: xavki
 
 
-# LINUX : SYSTEMD - L'Environnement & Exec
+# LINUX : SYSTEMD - Gestion de l'environnement
 
 
 <br>
@@ -11,15 +11,24 @@
 man systemd.service
 ```
 
-Objectif : comment permettre de l'auto-guerisson de vos services ?
+Objectif : 
 
-* gérées par le [Unit]
+* gérées par le [System]
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Propriétés de restart & Fails
+# LINUX : SYSTEMD - Gestion de l'environnement
 
 <br>
+
+* WorkingDirectory
+
+```
+[Service]
+Type=simple
+WorkingDirectory=/tmp/
+ExecStart=/usr/bin/cat xavki.txt
+```
 
 
 WorkingDirectory=
@@ -60,3 +69,6 @@ StandardError=append:/var/log/bird_watching.log
 SyslogIdentifier=bird_watching
 
 Environment=NODE_ENV=production PORT=1494
+
+
+RequiresMountsFor=
