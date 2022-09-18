@@ -24,14 +24,127 @@ Objectif :
 * WorkingDirectory
 
 ```
+echo "Test WorkingDirectory" > /tmp/xavki.txt
+```
+
+```
 [Service]
 Type=simple
 WorkingDirectory=/tmp/
 ExecStart=/usr/bin/cat xavki.txt
 ```
 
+Note : ne fonctionne pour le chemin (path) vers le script
 
-WorkingDirectory=
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Gestion de l'environnement
+
+<br>
+
+* les permissions sur les répertoires :
+
+```
+[Service]
+Type=simple
+ExecStart=/usr/bin/ls /home/oki
+InaccessibleDirectories=/home
+```
+ReadWriteDirectories=
+ReadOnlyDirectories=
+
+Note : ajouter "-" pour éviter une erreur si non existant
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Gestion de l'environnement
+
+<br>
+
+* protection de la home (true/false/read-only)
+
+ProtectHome > /home/ ou /run/user/ non accesible
+
+* ProtectSystem (true/false/full) :
+
+ProtectSystem > /usr/ en read-only
+		* si full, /etc/ aussi 
+
+
+
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Gestion de l'environnement
+
+<br>
+
+* le répertoire temporaire privé (True/False)
+
+
+```
+[Service]
+Type=simple
+ExecStart=/bin/bash -c "echo toto > /tmp/xavki.txt"
+PrivateTmp=True
+```
+
+Note :
+	* pour la sécurité, suppression /tmp/ & /var/tmp/ du process
+	* idem pour les networks & pour les devices
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Gestion de l'environnement
+
+<br>
+
+*  répertoire dédié au process (clean au stop)
+
+```
+[Service]
+Type=simple
+ExecStart=/usr/bin/sleep infinity
+RuntimeDirectory=xavki
+```
+
+RuntimeDirectoryMode : pour spécifier le mode (permissions sur le répertoire)
+
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Gestion de l'environnement
+
+<br>
+
+* définir des variables d'environnement
+
+Environment=NODE_ENV=production PORT=1494
+
+```
+[Service]
+Environment=ENV=production APP=myapp
+Type=simple
+ExecStart=/bin/bash -c "/usr/bin/echo $ENV; /usr/bin/echo $APP"
+```
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Gestion de l'environnement
+
+<br>
+
+* par fichier
+
+EnvironmentFile=/etc/myapp/environment
+
+```
+[Service]
+EnvironmentFile=/etc/myapp/environment
+Type=simple
+ExecStart=/bin/bash -c "/usr/bin/echo $ENV; /usr/bin/echo $APP"
+```
+
 
 defines on which directory the service will be launched, same as when you use cd to change a directory when you're working in the shell.
 
@@ -39,15 +152,19 @@ That doesn't mean that all the other paths (including that from ExecStart=) will
 
 RootDirectory= 
 
+RootDirectoryStartOnly=yes
+
+InaccessibleDirectories=/home
+
 User=penguin-web
 Group=penguin-web
 EnvironmentFile=/etc/penguin-web-app/environment
+DynamicUser=
+
 
 RemainAfterExit=: This directive is commonly used with the oneshot type. It indicates that the service should be considered active even after the process exits.
 
-RuntimeDirectory=IPS-JAI1
 PIDFile=: If the service type is marked as “forking”, this directive is used to set the path of the file that should contain the process ID number of the main child that should be monitored.
-BusName=: This directive should be set to the D-Bus bus name that the service will attempt to acquire when using the “dbus” service type.
 NotifyAccess=: This specifies access to the socket that should be used to listen for notifications when the “notify” service type is selected This can be “none”, “main”, or "all. The default, “none”, ignores all status messages. The “main” option will listen to messages from the main process and the “all” option will cause all members of the service’s control group to be processed.
 
 
@@ -72,3 +189,19 @@ Environment=NODE_ENV=production PORT=1494
 
 
 RequiresMountsFor=
+
+AssertPathExists=/srv/http
+
+PrivateTmp=true
+
+
+    Use built-in options to sandbox your service instead of chrooting it. Specifically:
+
+    RemoveIPC=true and PrivateTmp=true. These ensure that the lifetime of the IPC objects and temporary files created by the executed process is bound to the runtime of the service. Since /tmp and /var/tmp are usually the only world-writable directories on a system this ensures that the unit cannot leave files around after termination.
+    NoNewPrivileges=true and RestrictSUIDSGID=true. These ensure that processes invoked cannot take benefit or create SUID/SGID files or directories.
+    ProtectSystem=strict and ProtectHome=read-only prohibits the service from writing to anywhere in your filesystem (exceptions are /dev/ /proc/ and /sys/. In order to allow the service to write to certain directories, they have to be allow-listed using ReadWritePaths=.
+    RuntimeDirectory= to assign a runtime directory to the service, which is owned by the service's user, and removed automatically when the system is terminated.
+Nice=
+
+
+
