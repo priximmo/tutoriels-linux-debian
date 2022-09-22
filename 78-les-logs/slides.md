@@ -95,6 +95,10 @@ syslog.3.gz
 
 * /var/log/syslog : tous les messages sauf auth
 
+----------------------------------------------------------------------------------
+
+# LINUX : Les LOGS
+
 <br>
 
 * /var/log/messages : tous les messages non critiques

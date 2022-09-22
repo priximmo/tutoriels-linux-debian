@@ -2,7 +2,7 @@
 %author: xavki
 
 
-# LINUX : SYSTEMD - Gestion de l'environnement
+# LINUX : SYSTEMD - Logs & Journalctl
 
 
 <br>
@@ -16,78 +16,158 @@ Objectif : Consulter les logs des applicatifs gérés par systemd ?
 
 ----------------------------------------------------------------------------------
 
-# LINUX : SYSTEMD - Gestion de l'environnement
+# LINUX : SYSTEMD - Logs & Journalctl
 
 <br>
 
-C'est quoi des logs ??
-
-	* enregistrement des actions réalisées par les applicatifs
-
-	* historique
-
-	* idem pour les programmes dédiés au système
-
-	* permet de débuguer (retrouver la cause et corriger)
-
-	* par défaut les logs sont centralisés dans /var/log/
-
-	* rotation de logs : cycle de compression des logs
-
-	* types : 
-			* Application Logs
-			* Event Logs
-			* Service Logs
-			* System Logs
-
-	* format : syslog
+* journalctl : consulter vos logs via une commande
 
 ```
-<date> <user> <service/app[pid]> <message>
+journalctl
 ```
 
+<br>
 
-* /var/log/boot.log : logs de démarrage
+* pour une unité
 
-* /var/log/cron.log : logs dédiés aux crons
+```
+journalctl -u hello2
+```
 
-* /var/log/auth.log (secure) : les logs d'authentification/session et l'utilisation du sudo
+<br>
 
-* /var/log/syslog : tous les messages sauf auth
+* l'équivalent de tail
 
-* /var/log/messages : tous les messages non critiques
+```
+tail -f /var/log/syslog
+journalctl -fu hello
+```
 
-* /var/log/kern.log : les logs du kernel
+----------------------------------------------------------------------------------
 
-* /var/log/dmesg (dmesg) : les logs relatifs au device driver
+# LINUX : SYSTEMD - Logs & Journalctl
 
-* /var/log/mail.log : logs relatifs au serveur de mail
+<br>
 
-* /var/log/daemon.log : logs des services tournant en arrière plan
+* par applicatif
 
+```
+journalctl /usr/bin/sleep
+```
+
+<br>
+
+* par log level
+
+```
+journalctl -p err
+```
+
+<br>
+
+* cumuler
+
+```
+journalctl /usr/bin/sleep -u hello1
+```
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Logs & Journalctl
+
+<br>
+
+* par date
+
+```
+journalctl --since "2022-01-01 01:00:00" --until "2022-09-21 18:13:00"
+```
+
+<br>
+
+* mode courant
+
+```
+journalctl --since yesterday
+journalctl --since "1 hour ago"
+```
+
+<br>
+
+* sortie json
+
+```
+journalctl -u hello2 -o json
+```
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Logs & Journalctl
+
+<br>
+
+* logs level
+
+0 	Emergency 	emerg 		: système non utilisable
+1 	Alert 	alert 				: correction à apporter immédiatement
+2 	Critical 	crit 				: conditions critiques (hardware)
+3 	Error 	err 					: erreur
+4 	Warning 	warning 		: précvention
+5 	Notice 	notice 				: pas de problème mais à noter 
+6 	Informational 	info 	: information
+7 	Debug 	debug 				: maximum d'information
+
+----------------------------------------------------------------------------------
+
+# LINUX : SYSTEMD - Logs & Journalctl
+
+<br>
+
+* utilisation de syslog (défaut)
+
+```
 StandardOutput=syslog
 StandardError=syslog
-StandardOutput=append:/var/log/bird_watching.log
-StandardError=append:/var/log/bird_watching.log
-SyslogIdentifier=bird_watching
+```
 
-Environment=NODE_ENV=production PORT=1494
+<br>
 
+* spécifier une autre destination
 
-RequiresMountsFor=
+```
+StandardOutput=append:/var/log/xavki.log
+StandardError=append:/var/log/xavki_err.log
+```
 
-AssertPathExists=/srv/http
+inherit, null, tty, journal, kmsg
+journal+console, kmsg+console
+file:path, append:path, truncate:path, socket, fd:name
 
-PrivateTmp=true
+----------------------------------------------------------------------------------
 
+# LINUX : SYSTEMD - Logs & Journalctl
 
-    Use built-in options to sandbox your service instead of chrooting it. Specifically:
+<br>
 
-    RemoveIPC=true and PrivateTmp=true. These ensure that the lifetime of the IPC objects and temporary files created by the executed process is bound to the runtime of the service. Since /tmp and /var/tmp are usually the only world-writable directories on a system this ensures that the unit cannot leave files around after termination.
-    NoNewPrivileges=true and RestrictSUIDSGID=true. These ensure that processes invoked cannot take benefit or create SUID/SGID files or directories.
-    ProtectSystem=strict and ProtectHome=read-only prohibits the service from writing to anywhere in your filesystem (exceptions are /dev/ /proc/ and /sys/. In order to allow the service to write to certain directories, they have to be allow-listed using ReadWritePaths=.
-    RuntimeDirectory= to assign a runtime directory to the service, which is owned by the service's user, and removed automatically when the system is terminated.
-Nice=
+* définir un identifiant spécifique
 
+```
+SyslogIdentifier=xavki
+```
 
+<br>
 
+* ajouter des champs
+
+```
+LogExtraFields
+```
+
+<br>
+
+* limiter le nombre de messages par intervales
+
+```
+LogRateLimitIntervalSec
+LogRateLimitBurst
+```
