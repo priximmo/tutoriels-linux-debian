@@ -11,10 +11,6 @@
 Objectif : Et si j'ai des services que je veux instancier ?
 						Avec une seule unité ?
 
---------------------------------------------------------------------------
-
-# LINUX : SYSTEMD - Les Templates
-
 <br>
 
 * un service simple sans template
@@ -35,10 +31,6 @@ Note : argument = instance = variable réutilisable dans la configuration
 
 Attention : le nom du fichier doit aussi comporter le @
 
---------------------------------------------------------------------------
-
-# LINUX : SYSTEMD - Les Templates
-
 <br>
 
 * deux formats de variables possibles:
@@ -46,11 +38,6 @@ Attention : le nom du fichier doit aussi comporter le @
 %i : échappe les caractères spéciaux
 
 %I : sans échappemement
-
---------------------------------------------------------------------------
-
-# LINUX : SYSTEMD - Les Templates
-
 
 <br>
 
@@ -67,3 +54,12 @@ Attention : le nom du fichier doit aussi comporter le @
     %U: UID du user qui lance l'unité
     %H: le nom du serveur où a été lancé l'unité (hostname)
 ```
+
+
+Alias=
+Also=
+WantedBy=
+RequiredBy=
+DefaultInstance=
+
+AssertPath
